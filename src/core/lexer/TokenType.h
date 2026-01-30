@@ -46,7 +46,6 @@ struct Token
 		os << token.toString();
 		return os;
 	}
-
 	bool operator==(const Token& other) const {
 		return type == other.type && value == other.value;
 	}

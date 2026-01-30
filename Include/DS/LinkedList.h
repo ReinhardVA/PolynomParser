@@ -16,6 +16,31 @@ private:
 	Node* head;
 	Node* tail;
 	int listSize;
+
+public:
+	class Iterator {
+	private:
+		Node* current;
+	public:
+		Iterator(Node* node) : current(node) {}
+
+		T& operator*() const {
+			return current->data;
+		}
+
+		Iterator& operator++() {
+			if (current) {
+				current = current->next;
+			}
+			return *this;
+		}
+
+		bool operator!=(const Iterator& other) const {
+			return current != other.current;
+		}
+	};
+
+
 public:
 	LinkedList() : head(nullptr), tail(nullptr), listSize(0) {}
 
@@ -30,6 +55,7 @@ public:
 	~LinkedList() {
 		clear();
 	}
+	
 	void addFront(const T& value) {
 		Node* newNode = new Node(value);
 		newNode->next = head;
@@ -139,6 +165,15 @@ public:
 		}
 	}
 
+
+	Iterator begin() {
+		return Iterator(head);
+	}
+	
+	Iterator end() {
+		return Iterator(nullptr);
+	}
+	
 	T& peekFront() {
 		if (head == nullptr) {
 			throw out_of_range("List is empty");
