@@ -9,7 +9,7 @@ struct ASTNode
 struct NumberNode : public ASTNode
 {
 	double value;
-	NumberNode(int val) : value(val) {}
+	NumberNode(double val) : value(val) {}
 };
 
 struct VariableNode : public ASTNode
