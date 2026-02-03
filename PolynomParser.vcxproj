@@ -133,13 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="src\core\parser\Parser.cpp" />
     <ClCompile Include="src\core\lexer\Lexer.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="src\ast\ASTNode.h" />
+    <ClInclude Include="src\core\parser\Parser.h" />
+    <ClInclude Include="src\core\parser\ASTNode.h" />
     <ClInclude Include="Include\DS\LinkedList.h" />
     <ClInclude Include="Include\DS\Stack.h" />
     <ClInclude Include="src\core\lexer\Lexer.h" />

@@ -1,8 +1,9 @@
 ﻿#include <iostream>
 #include <DS/Stack.h>
 #include "core/lexer/Lexer.h"
-#include "ast/ASTNode.h"
-#include "../Parser.h"
+#include "core/parser/ASTNode.h"
+#include "core/parser/Parser.h"
+
 using namespace std;
 
 // Recursively print the AST with indentation

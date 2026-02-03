@@ -1,8 +1,8 @@
 #include "Parser.h"
-#include "src/ast/ASTNode.h"
-#include "src/core/lexer/TokenType.h"
 #include <DS/LinkedList.h>
 #include <DS/Stack.h>
+#include "../lexer/TokenType.h"
+#include "ASTNode.h"
 
 using namespace std;
 
