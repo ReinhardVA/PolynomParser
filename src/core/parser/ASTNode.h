@@ -33,5 +33,4 @@ struct OperatorNode : public ASTNode {
 		delete left;
 		delete right;
 	}
-
 };

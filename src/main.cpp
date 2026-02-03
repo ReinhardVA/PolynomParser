@@ -3,6 +3,7 @@
 #include "core/lexer/Lexer.h"
 #include "core/parser/ASTNode.h"
 #include "core/parser/Parser.h"
+#include "core/evaluator/Evaluator.h"
 
 using namespace std;
 
@@ -39,7 +40,8 @@ void printAST(ASTNode* node, string indent = "", bool isLast = true) {
 int main()
 {
 	//string input = "3.5 + x^2 - 7 * x";
-	string input = "3+5*2-8/4";
+	//string input = "3+5*2-8/4";
+	string input = "(1 + 2) * (x - 3) / 4";
 	cout << "Input Expression: " << input << endl;
 	Lexer lexer(input);
 	LinkedList<Token> tokens = lexer.tokenize();
@@ -47,10 +49,17 @@ int main()
 	tokens.print();
 
 	ASTNode* root = ParseToAST(tokens);
-	if (root) {
+	/*if (root) {
 		cout << "AST Structure: " << root << endl;
 		printAST(root);
+	}*/
+	Evaluator evaluator;
+	for(int i = 0; i < 5; i++) {
+		double result = evaluator.EvaluateExpression(root, static_cast<double>(i));
+		cout << "Evaluation with x=" << i << ": " << result << endl;
 	}
+
+	delete root;
 
     return 0;
 }
