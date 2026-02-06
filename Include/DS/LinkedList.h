@@ -180,6 +180,12 @@ public:
 		}
 		return head->data;
 	}
+	T& peekBack() {
+		if (tail == nullptr) {
+			throw out_of_range("List is empty");
+		}
+		return tail->data;
+	}
 	T& getDatas(int index) {
 		Node* current = head;
 		for(int i = 0; i < index; i++) {

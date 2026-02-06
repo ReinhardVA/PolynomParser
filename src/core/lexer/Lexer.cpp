@@ -9,6 +9,8 @@ using namespace std;
 
 char Lexer::peek(int offset) const
 {
+	if(position + offset >= length)
+		return '\0';
 	return input[position + offset];
 }
 
@@ -28,7 +30,7 @@ LinkedList<Token> Lexer::tokenize()
 {
 	// check spaces and skip them
 	// tokenize numbers, variables, operators, parentheses
-	// " 6 + 5 " -> [NUMBER(6), OPERATOR(+), NUMBER(5)]
+	// "-x+8" -> [NUMNER(-1), OPERATOR(*), VARIABLE(x), OPERATOR(+), NUMBER(8)]
 	LinkedList<Token> tokens;
 	while (!isAtEnd()) {
 		char c = peek(); // get current character
@@ -41,10 +43,19 @@ LinkedList<Token> Lexer::tokenize()
 			while (isdigit(peek()) || peek() == '.') {
 				numStr += advance();
 			}
+			char nextChar = peek();
+			if(isalpha(nextChar) || nextChar == '(') {
+				tokens.addEnd(Token(TokenType::NUMBER, numStr));
+				tokens.addEnd(Token(TokenType::OPERATOR, "*", 2));
+				continue;
+			}
 			tokens.addEnd(Token(TokenType::NUMBER, numStr));
 			continue;
 		}
 		if (isalpha(c)) {
+			if (isdigit(peek(1))) {
+				tokens.addEnd(Token(TokenType::OPERATOR, "*", 2));
+			}
 			tokens.addEnd(Token(TokenType::VARIABLE, string(1, c)));
 			advance();
 			continue;
@@ -52,8 +63,28 @@ LinkedList<Token> Lexer::tokenize()
 		switch (c) {
 		case '+':
 			tokens.addEnd(Token(TokenType::OPERATOR, string(1, c), 1)); advance(); break;
-		case '-':
-			tokens.addEnd(Token(TokenType::OPERATOR, string(1, c), 1)); advance(); break;
+		case '-':{
+			bool isUnary = false;
+			if (tokens.isEmpty()) 
+				isUnary = true;
+			else {
+				TokenType lastToken = tokens.peekBack().type;
+				if(lastToken == TokenType::OPERATOR || lastToken == TokenType::LPAREN) {
+					isUnary = true;
+				}
+			}
+
+			if(isUnary) {
+				tokens.addEnd(Token(TokenType::NUMBER, "-1"));
+				tokens.addEnd(Token(TokenType::OPERATOR, "*", 2));
+			}
+			else {
+				tokens.addEnd(Token(TokenType::OPERATOR, string(1, c), 1)); advance(); break;
+			}
+
+			advance(); 
+			break;
+		}
 		case '*':
 			tokens.addEnd(Token(TokenType::OPERATOR, string(1, c), 2)); advance(); break;
 		case '/':

@@ -41,7 +41,9 @@ int main()
 {
 	//string input = "3.5 + x^2 - 7 * x";
 	//string input = "3+5*2-8/4";
-	string input = "(1 + 2) * (x - 3) / 4";
+	/*string input = "(12 + 2) * (2x) / 4";*/
+	//string input = "x3 + 4";
+	string input = "-3x + 5";
 	cout << "Input Expression: " << input << endl;
 	Lexer lexer(input);
 	LinkedList<Token> tokens = lexer.tokenize();
@@ -49,10 +51,10 @@ int main()
 	tokens.print();
 
 	ASTNode* root = ParseToAST(tokens);
-	/*if (root) {
+	if (root) {
 		cout << "AST Structure: " << root << endl;
 		printAST(root);
-	}*/
+	}
 	Evaluator evaluator;
 	for(int i = 0; i < 5; i++) {
 		double result = evaluator.EvaluateExpression(root, static_cast<double>(i));
@@ -63,3 +65,11 @@ int main()
 
     return 0;
 }
+
+
+// Problems:
+// 1. Negative numbers are not handled correctly. 
+// For example, the expression "-3 + 5" is tokenized as OPERATOR(-) NUMBER(3) OPERATOR(+) NUMBER(5), which leads to incorrect parsing and evaluation.
+// The lexer should be modified to recognize negative numbers as a single token, or the parser should be adjusted to handle unary operators properly.
+// eğer bir sayıdan önce - operatörü gelirse ve arada boşluk yoksa
+// bu iki token arasında bir NEGATIVE tokenı eklenebilir veya mevcut OPERATOR(-) tokenı NEGATIVE olarak işaretlenebilir.
