@@ -159,12 +159,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\app\Application.cpp" />
+    <ClCompile Include="src\graphics\Plotter.cpp" />
     <ClCompile Include="src\core\evaluator\Evaluator.cpp" />
     <ClCompile Include="src\core\parser\Parser.cpp" />
     <ClCompile Include="src\core\lexer\Lexer.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\app\Application.h" />
+    <ClInclude Include="src\graphics\Plotter.h" />
     <ClInclude Include="src\core\evaluator\Evaluator.h" />
     <ClInclude Include="src\core\parser\Parser.h" />
     <ClInclude Include="src\core\parser\ASTNode.h" />
