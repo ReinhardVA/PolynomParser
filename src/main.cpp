@@ -44,7 +44,7 @@ int main()
 {
 	//string input = "3.5 + x^2 - 7 * x";
 	//string input = "3+5*2-8/4";
-	/*string input = "(12 + 2) * (2x) / 4";*/
+	//string input = "(12 + 2) * (2x) / 4";
 	//string input = "x3 + 4";
 	//string input = "-3x + 5";
 	//cout << "Input Expression: " << input << endl;

@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <imgui-SFML.h>
+#include <string>
+#include <vector>
+#include <SFML/System/Vector2.hpp>
 
 class Application
 {
@@ -12,5 +14,7 @@ public:
 	Application();
 	~Application();
 	void run();
+	std::vector<sf::Vector2f> calculateGraph(std::string& inputString);
 };
 
+// Text box oluştur, denklemi al, denklemi lexer'a gönder, tokenları al, parser'a gönder, AST'yi al, evaluator'a gönder, x aralığını belirle, sonuçları plotter'a gönder.
