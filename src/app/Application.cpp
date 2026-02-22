@@ -43,23 +43,22 @@ void Application::run()
 				window.close();
 		}
 		ImGui::SFML::Update(window, deltaClock.restart());
-		
-		ImGui::ShowDemoWindow();
-		
+				
 		// UI işlemleri
-		ImGui::Begin("Hello, world!");
+		ImGui::Begin("Math Graph Drawer");
+		plotter.drawGrid(window);
+		ImGui::InputText("Denklemi giriniz", inputText, IM_ARRAYSIZE(inputText));
 		if (ImGui::Button("Hesapla")) {
-			ImGui::InputText("Denklemi giriniz: ", inputText, IM_ARRAYSIZE(inputText));
 			// inputText'i lexer'a gönder, tokenları al, parser'a gönder, AST'yi al, evaluator'a gönder, x aralığını belirle, sonuçları plotter'a gönder.
 			inputStr = inputText;
 			points = calculateGraph(inputStr);
-			plotter.setPoints(points, window);
 		}
 		ImGui::End();
 
 		window.clear(sf::Color(0, 0, 0));
-		// plotter.render(window);
-
+		
+		plotter.drawGrid(window);
+		plotter.drawGraph(points, window);
 		ImGui::SFML::Render(window);
 		
 		window.display();
@@ -69,9 +68,9 @@ void Application::run()
 
 std::vector<sf::Vector2f> Application::calculateGraph(std::string& inputString)
 {
-	double minX = -10.0f;
 	double maxX = 10.0f;
 	double step = 0.1f;
+	double minX = -10.0f;
 
 	std::vector<sf::Vector2f> points;
 	Lexer lexer(inputString);
@@ -80,7 +79,7 @@ std::vector<sf::Vector2f> Application::calculateGraph(std::string& inputString)
 	Evaluator evaluator;
 	for (double x = minX; x <= maxX; x += step) {
 		double y = evaluator.EvaluateExpression(root, x);
-		points.emplace_back(x, y);
+		points.emplace_back(static_cast<float>(x), static_cast<float>(y));
 	}
 	return points;
 }

@@ -5,8 +5,13 @@
 
 class Plotter
 {
-	// Pencereyi oluşturmaz, gelen pencere referansını kullanır, matematiksel verileri alır çizgiye dönüştürür, Gridleri, eksenleri çizer, çizgileri çizer, renkleri ve kalınlıkları ayarlar.
 public:
-	void setPoints(const std::vector<sf::Vector2f>& points, sf::RenderWindow& window);
+	void drawGraph(const std::vector<sf::Vector2f>& points, sf::RenderWindow& window);
+	void drawGrid(sf::RenderWindow& window);
+	Plotter();
+private:
+	float zoom = 50.0f;
+	sf::Vector2f origin;
+	sf::Font m_font;
 };
 

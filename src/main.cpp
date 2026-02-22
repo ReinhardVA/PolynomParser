@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include <imgui-SFML.h>
 #include "imgui.h"
+#include "app/Application.h"
 
 using namespace std;
 
@@ -65,6 +66,8 @@ int main()
 	//}
 
 	//delete root;
+	Application app;
+	app.run();
     return 0;
 }
 
