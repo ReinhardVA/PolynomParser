@@ -22,7 +22,15 @@ A desktop mathematical graph plotting application built with C++. Enter a polyno
 
 ## Tech Stack
 
-- **C++17**
+- **C++20**
 - **[SFML 3](https://www.sfml-dev.org/)** — Window management & 2D rendering
 - **[Dear ImGui](https://github.com/ocornut/imgui)** (+ imgui-SFML) — GUI widgets
 - Custom linked-list data structure (`DS/LinkedList.h`)
+
+
+## Examples
+| Polynomial Equation | Graph |
+| :--- | :--- |
+| `f(x) = x^2` | ![x^2](assets/x^2.png) |
+| `f(x) = x^3 - 4x` | ![x3](assets/x^3.png) |
+| `f(x) = x^2 + 3x + 1` | ![x3](assets/x^2+3x+1.png) |
